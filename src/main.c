@@ -4,23 +4,45 @@
 #include "terminal_colors.h"
 
 int main(){
-  long long amount = 500;
-  int times = 1;
-  int bet = 0;
-  int slot_symbol[3] = {0, 0, 0};
+  long long int amount = 10'000'000;
+  short int times = 1;
+  short int bet = 0;
+  short int risk = 0;
+  short int rand_num = 0;
+  int slot_symbol[] = {0, 0, 0};
   srand(time(NULL));
 
-do{
+// -------------------------------------------------
+//  Ask the player how much they would like to bet,
+//  and ask how many times they would like to bet.
+// -------------------------------------------------
+
+  do{
     printf("How much would you like to bet? \n", amount);
-    colored_printf(155, 155, 155, "\tYou have $%d\n\n$", amount);
+    cprintf(155, 155, 155, "\tYou have $%lld\n", amount);
+    cprintf(0, 200, 0, "$");
     scanf("%d", &bet);
 
     printf("How many times would you like to bet? \n");
-    colored_printf(155, 155, 155, "\t[ The default is 1 ] \n");
     scanf("%d", &times);
-    printf("\n");
+
+    if(times == 0){
+      printf("Congrats, how do you feel about doing that.");
+    };
+
+// -----------------------------------------------------------------
+//                      Slot Symbols
+//  |--------|-----------|--------------|------------|-------------|
+//  | Blank  | Cherries  | Bars         | Bells      | Sevens      |
+//  | No pay | Lower pay | Variable pay | Higher pay | Highest pay |
+//  | x1     | x2        | x2 / x4 / x6 | x20        | x500        |
+//  |--------|-----------|--------------|------------|-------------|
+//
+// ------------------------------------------------------------------
 
     for(int i = 1; i <= times; i++){
+      rand_num = (rand() % 100) + 1;
+
       for(int j = 0; j <= 2; j++){
         slot_symbol[j] = (rand() % 7) + 1;
 
@@ -35,29 +57,46 @@ do{
         }
       }
 
-      if(amount <= 0){
-        colored_print(255, 0, 0, "\t You were shot and killed by the mafia.\n");
-      }
-
-      else if(slot_symbol[0] == slot_symbol[1] && slot_symbol[1] == slot_symbol[2]){
-        colored_print(0, 255, 0, "\t[You win the JACKPOT! times three your money!]\n");
+      if(slot_symbol[0] == slot_symbol[1] && slot_symbol[1] == slot_symbol[2]){
+        cprint(0, 255, 0, "\t[You win the JACKPOT! times three your money!]\n");
         amount = ((bet * 3) + amount) + 1000;
-        colored_printf(0, 155, 0, "\t[Balance $%d]\n\n", amount);
+        cprintf(0, 155, 0, "\t[Balance $%d]\n\n", amount);
       }
 
-      else if(slot_symbol[0] == slot_symbol[1] || slot_symbol[1] == slot_symbol[2]){
-        colored_print(255, 255, 0, "\t[So close; Try again. one point five times your money!]\n");
-        amount = (bet * 1.5) + amount;
-        colored_printf(155, 155, 0, "\t[Balance $%d]\n\n", amount);
-      }
+     else if(slot_symbol[0] == slot_symbol[1] || slot_symbol[1] == slot_symbol [2]){
+       cprint(255, 255, 0, "\t[So close; Try again. one point five times your  money!]\n");
+       amount = (bet * 1.5) + amount;
+       cprintf(155, 155, 0, "\t[Balance $%d]\n\n", amount);
+     }
 
       else{
-        colored_printf(255, 0, 0, "\t[You lose. -%d]\n", bet);
+        cprintf(255, 0, 0, "\t[You lose. -%d]\n", bet);
         amount -= bet;
-        colored_printf(155, 0, 0, "\t[Balance $%d]\n\n", amount);
+        cprintf(155, 0, 0, "\t[Balance $%d]\n\n", amount);
       }
-    }
+// ----------------------------------------------
+//  Mafia risk checker and incrementer
+
+      if(rand_num < 5){
+        (risk)++;
+      }
+
+      else if(risk >= 15){
+        rand_num = (rand() % 100) + 1;
+      }
+
+     else if (rand_num <= 100){
+       amount = 0;
+       printf("You were murdered by the Mafia; Congrats on dying.");
+       break;
+     }
+
+      amount -= bet;
+      cprintf(155, 155, 155, "amount : %d \nrisk : %d \n", amount, risk);
+  }
+// ----------------------------------------------
+
   }while(amount > 0);
 
-return 0;
+  return 0;
 }
