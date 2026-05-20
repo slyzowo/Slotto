@@ -6,9 +6,12 @@ TUI psuedo-gambling app
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Windows 11](https://img.shields.io/badge/Windows%2011-%230079d5.svg?style=for-the-badge&logo=Windows%2011&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
 # Installation
 download from [link] and run the `.exe`
 
+### Languages Supported
+- English (US)
 
 # How do i play?
 1. Run the `.exe`.
@@ -54,3 +57,8 @@ In the case that you die from the Mafia, or that you run to or below zero dollar
 
 # TODO
 - switch to the winapi instead of using `<conio.h>`
+- add support for linux
+- add multiple languages
+  - French (france)
+  - Norwegian (bokmål)
+- switch to c++?

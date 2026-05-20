@@ -21,12 +21,17 @@
 /*
   Q : why are these variables?
   A : if i change my mind on the options later, and
-      it'll be easier to replace than just [ctrl] + [shift] + l.
+      it'll be easier to replace than just [ctrl] + [shift] + L.
 */
 char option1[] = "Bet";
 char option2[] = "Loan";
 char option3[] = "Deposit";
 char option4[] = "Withdrawl";
+
+struct Bet{
+  int times;
+  int amount;
+};
 
 int opt_selector(int opt_counter){
 
@@ -75,25 +80,33 @@ int opt_selector(int opt_counter){
   return opt_counter;
 }
 
-void bet(int bet_amount, int bet_times){
+struct Bet betting(int bet_amount, int bet_times){
+  struct Bet bet;
+  bet.amount = bet_amount;
+  bet.times = bet_times;
+
   printf("How much would you like to bet?\n");
   scanf("%d", &bet_amount);
-  printf("you bet $%d\n", bet_amount);
 
   printf("How many times would you like to bet?\n");
   scanf("%d", &bet_times);
-  printf("you bet %d many times\n", bet_times);
+
+  if(bet_times <= 0 || bet_amount <= 0){
+    printf("You can\'t bet nothing.");
+  }
+
+  return bet;
 }
 
-void loan(){
+void loaning(){
   printf("LOAN");
 }
 
-void deposit(){
+void depositing(){
   printf("DEPOSIT");
 }
 
-void withdrawl(){
+void withdrawling(){
   printf("WITHDRAWL");
 }
 
@@ -102,16 +115,19 @@ void death(){
 }
 
 int main(){
+
+  struct Bet Bet;
+  Bet.amount = 0;
+  Bet.times = 1;
+
   long long int user_balance = 100;
-  int bet_times = 1;
-  int bet_amount = 0;
   int rand_num = 0;
-  short int risk = 0;
   int slot_symbol[] = {0, 0, 0};
-  bool death = false;
-  srand(time(NULL));
   int key = 0;
   int opt_counter = 0;
+  short int risk = 0;
+  bool death = false;
+  srand(time(NULL));
 
   printf("Selection Menu ( Esc to exit )");
   printf("\n\033[1;30;47m[ %s ]\033[0m", option1);
@@ -125,24 +141,24 @@ int main(){
 
     if(key == ENTER_KEY){
       switch (opt_counter){
-      case 0:
-        bet(bet_amount, bet_times);
-      break;
+        case OPTION_1:
+          Bet = betting(Bet.amount, Bet.times);
+        break;
 
-      case 1:
-        loan();
-      break;
+        case OPTION_2:
+          loaning();
+        break;
 
-      case 2:
-        deposit();
-      break;
+        case OPTION_3:
+          depositing();
+        break;
 
-      case 3:
-        withdrawl();
-      break;
+        case OPTION_4:
+          withdrawling();
+        break;
         
         default:
-        printf("SOMETHING WENT WRONG HELP MEEEEEEE\n");
+          printf("SOMETHING WENT WRONG HELP MEEEEEEE\n");
         break;
       }
     }
@@ -161,7 +177,6 @@ int main(){
           opt_counter--;
           printf("\033[0J \033[1J \033[H");
           opt_counter = opt_selector(opt_counter);
-          printf("Option Selected : %d\n", opt_counter);
         break;
 
         case DOWN_ARROW_KEY:
@@ -169,7 +184,6 @@ int main(){
           opt_counter++;
           printf("\033[0J \033[1J \033[H");
           opt_counter = opt_selector(opt_counter);
-          printf("Option Selected : %d\n", opt_counter);
         break;
 
         default:
