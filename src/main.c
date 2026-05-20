@@ -4,12 +4,19 @@
 #include <time.h>
 #include <conio.h>
 
+// keys
 #define UP_ARROW_KEY 72
 #define DOWN_ARROW_KEY 80
 #define LEFT_ARROW_KEY 75
 #define RIGHT_ARROW_KEY 77
 #define ESCAPE_KEY 27
 #define ENTER_KEY 13
+
+// listing options easier for switches
+#define OPTION_1 0
+#define OPTION_2 1
+#define OPTION_3 2
+#define OPTION_4 3
 
 /*
   Q : why are these variables?
@@ -31,31 +38,31 @@ int opt_selector(int opt_counter){
     opt_counter = 3;
   }
 
-  printf("Selection Menu \nEsc to exit");
+  printf("Selection Menu ( Esc to exit )");
 
   switch (opt_counter){
-    case 0:
+    case OPTION_1:
       printf("\n\033[1;30;47m[ %s ]\033[0m", option1);
       printf("\n[ %s ]", option2);
       printf("\n[ %s ]", option3);
       printf("\n[ %s ]\n", option4);
       break;
 
-    case 1:
+    case OPTION_2:
       printf("\n[ %s ]", option1);
       printf("\n\033[1;30;47m[ %s ]\033[0m", option2);
       printf("\n[ %s ]", option3);
       printf("\n[ %s ]\n", option4);
       break;
 
-    case 2:
+    case OPTION_3:
       printf("\n[ %s ]", option1);
       printf("\n[ %s ]", option2);
       printf("\n\033[1;30;47m[ %s ]\033[0m", option3);
       printf("\n[ %s ]\n", option4);
       break;
 
-    case 3:
+    case OPTION_4:
       printf("\n[ %s ]", option1);
       printf("\n[ %s ]", option2);
       printf("\n[ %s ]", option3);
@@ -71,11 +78,11 @@ int opt_selector(int opt_counter){
 void bet(int bet_amount, int bet_times){
   printf("How much would you like to bet?\n");
   scanf("%d", &bet_amount);
-  printf("you bet $%d\n", &bet_amount);
+  printf("you bet $%d\n", bet_amount);
 
   printf("How many times would you like to bet?\n");
   scanf("%d", &bet_times);
-  printf("you bet %d many times\n", &bet_times);
+  printf("you bet %d many times\n", bet_times);
 }
 
 void loan(){
@@ -106,6 +113,7 @@ int main(){
   int key = 0;
   int opt_counter = 0;
 
+  printf("Selection Menu ( Esc to exit )");
   printf("\n\033[1;30;47m[ %s ]\033[0m", option1);
   printf("\n[ %s ]", option2);
   printf("\n[ %s ]", option3);
