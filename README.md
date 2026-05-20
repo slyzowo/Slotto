@@ -9,5 +9,48 @@ TUI psuedo-gambling app
 # Installation
 download from [link] and run the `.exe`
 
-## Mechanics
-Place a bet, say how many times, and don't die from the mafia coming after you!
+
+# How do i play?
+1. Run the `.exe`.
+
+2. You are shown an options menu with four options
+  - [Bet](#bet)
+  - [Loan](#loan)
+  - [Deposit](#deposit)
+  - [Withdrawl](#withdrawl)
+
+(to exit the game, press the escape key, make sure to deposit)
+
+3. Get rich and dont [die](#death)!
+
+
+## Bet
+While looping through the bet times, 
+at the beginning of each bet, 
+do [Mafia](#mafia). After the [Mafia](#mafia) keyeck, 
+pull three randomly generated numbers, 
+
+if all three of those numbers are the exact same, reward the player with : `amount += bet;` 
+
+if two of those numbers are the exact same, reward the player with : `amount += (bet * 0.5);` 
+
+if none of those numbers are the exact same, reward the player with : `amount -= bet;`
+
+
+## Loan
+Loaning from the maifia in hopes of getting rich? be careful, you have to pay them back as soon as possible, otherwise you might die.
+
+## Deposit
+Puts your money into the bank.
+
+## Withdrawl
+Takes your money from the bank.
+
+## Mafia
+Each time the player bets, the player has a 10% keyance to increase the risk meter if the risk counter goes over [15], you have a keyance to die.
+
+## Death
+In the case that you die from the Mafia, or that you run to or below zero dollars, game over.
+
+# TODO
+- switch to the winapi instead of using `<conio.h>`
