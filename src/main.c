@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -18,6 +19,10 @@
 #define OPTION_3 2
 #define OPTION_4 3
 
+void clearScreen(){}
+void getConsoleTitle(){}
+void setConsoleTitle(){}
+
 /*
   Q : why are these variables?
   A : if i change my mind on the options later, and
@@ -27,11 +32,6 @@ char option1[] = "Bet";
 char option2[] = "Loan";
 char option3[] = "Deposit";
 char option4[] = "Withdrawl";
-
-struct Bet{
-  int times;
-  int amount;
-};
 
 int opt_selector(int opt_counter){
 
@@ -75,27 +75,29 @@ int opt_selector(int opt_counter){
       break;
 
     default:
+      printf("Something went wrong...\n ");
+      printf("Please don\'t do that\n");
   }
 
   return opt_counter;
 }
 
-struct Bet betting(int bet_amount, int bet_times){
-  struct Bet bet;
-  bet.amount = bet_amount;
-  bet.times = bet_times;
-
+int betting(int bet_amount, int bet_times){
+  
   printf("How much would you like to bet?\n");
+  printf("$");
   scanf("%d", &bet_amount);
-
+  
   printf("How many times would you like to bet?\n");
   scanf("%d", &bet_times);
-
+  
   if(bet_times <= 0 || bet_amount <= 0){
     printf("You can\'t bet nothing.");
   }
+  
+  bet_amount += 20;
 
-  return bet;
+  return bet_amount;
 }
 
 void loaning(){
@@ -116,11 +118,9 @@ void death(){
 
 int main(){
 
-  struct Bet Bet;
-  Bet.amount = 0;
-  Bet.times = 1;
-
   long long int user_balance = 100;
+  long long int bet_amount = 100;
+  int bet_times = 0;
   int rand_num = 0;
   int slot_symbol[] = {0, 0, 0};
   int key = 0;
@@ -142,7 +142,7 @@ int main(){
     if(key == ENTER_KEY){
       switch (opt_counter){
         case OPTION_1:
-          Bet = betting(Bet.amount, Bet.times);
+          bet_amount = betting(bet_amount, bet_times);
         break;
 
         case OPTION_2:
@@ -175,6 +175,7 @@ int main(){
         case UP_ARROW_KEY:
         case LEFT_ARROW_KEY:
           opt_counter--;
+// you will not believe how *jank* this code is,
           printf("\033[0J \033[1J \033[H");
           opt_counter = opt_selector(opt_counter);
         break;

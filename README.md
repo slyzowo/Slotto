@@ -56,9 +56,10 @@ Each time the player bets, the player has a 10% keyance to increase the risk met
 In the case that you die from the Mafia, or that you run to or below zero dollars, game over.
 
 # TODO
-- switch to the winapi instead of using `<conio.h>`
+- switch to the `<windows.h>` instead of using `<conio.h>`
 - add support for linux
-- add multiple languages
+- add multiple languages (unicode)
   - French (france)
   - Norwegian (bokmål)
 - switch to c++?
+- controller support?
