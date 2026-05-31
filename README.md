@@ -22,8 +22,6 @@ download from [link] and run the `.exe`
   - [Deposit](#deposit)
   - [Withdrawl](#withdrawl)
 
-(to exit the game, press the escape key, make sure to deposit)
-
 3. Get rich and dont [die](#death)!
 
 
@@ -56,10 +54,16 @@ Each time the player bets, the player has a 10% keyance to increase the risk met
 In the case that you die from the Mafia, or that you run to or below zero dollars, game over.
 
 # TODO
-- switch to the `<windows.h>` instead of using `<conio.h>`
-- add support for linux
-- add multiple languages (unicode)
-  - French (france)
-  - Norwegian (bokmål)
-- switch to c++?
-- controller support?
+
+0. finish a working build
+    - add loaning from the mafia
+    - add save files (depositing and withdrawling)
+
+0. add multiple languages (unicode)
+    - French (france)
+    - Norwegian (bokmål)
+
+0. switch to c++?
+
+0. make a TUI
+    - controller support?
