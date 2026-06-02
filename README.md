@@ -56,14 +56,15 @@ In the case that you die from the Mafia, or that you run to or below zero dollar
 # TODO
 
 0. finish a working build
-    - add loaning from the mafia
-    - add save files (depositing and withdrawling)
+    - [ ] set up betting
+    - [ ] add loaning from the mafia
+    - [ ] add save files (depositing and withdrawling)
 
 0. add multiple languages (unicode)
-    - French (france)
-    - Norwegian (bokmål)
+    - [ ] French (france)
+    - [ ] Norwegian (bokmål)
 
 0. switch to c++?
 
 0. make a TUI
-    - controller support?
+    - [ ] controller support?

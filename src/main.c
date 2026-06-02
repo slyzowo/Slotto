@@ -32,10 +32,6 @@ void withdrawl(){
   printf("WITHDRAWL\n");
 }
 
-void death(){
-  printf("DEATH\n");
-}
-
 int main(){
 
   long long int user_balance = 100;
