@@ -25,8 +25,10 @@ int bet(int bet_amount, int bet_times){
   return bet_amount;
 }
 
-void loan(){
-  printf("LOAN\n");
+int loan(int loan_amount){
+  printf("You\'ve now loaned from the mafia.\n");
+  printf("You now have to pay $%d back.\n", loan_amount + loan_amount);
+return loan_amount;
 }
 
 void deposit(){
@@ -41,11 +43,10 @@ int main(){
 
   long long int user_balance = 100;
   long long int bet_amount = 0;
+  int loan_amount = 0;
   int bet_times = 0;
   int rand_num = 0;
   int slot_symbol[] = {0, 0, 0};
-  int key = 0;
-  int opt_counter = 0;
   short int risk = 0;
   bool death = false;
   char user_input[] = "";
@@ -58,24 +59,26 @@ int main(){
   printf("\t- %s\n", option4);
   printf("\t- %s\n", option5);
   printf("User Balance : $%lld\n", user_balance);
-
+  
   while(1){
-
+    
     scanf("%s", &user_input);
     
     if(strcmp(user_input, option1) == 0){
-
-      printf("How much would you like to bet? : ");
+      printf("How much would you like to bet? : $");
       scanf("%d", &bet_amount);
-
       printf("How many times would you like to bet? : ");
       scanf("%d", &bet_times);
-
-      user_balance = bet(bet_amount, bet_times);
+      bet_amount = bet(bet_amount, bet_times);
+      printf("User Balance : $%lld\n", user_balance);
     }
     
-    else if(strcmp(user_input, option2) == 0){
-      loan();
+    else if(strcmp(user_input, option2) == 0){      
+      printf("How much would you like to loan from the mafia? : $");
+      scanf("%d", &loan_amount);
+      loan_amount = loan(loan_amount);
+      user_balance += loan_amount;
+      printf("User Balance : $%lld\n", user_balance);
     }
     
     else if(strcmp(user_input, option3)== 0){
