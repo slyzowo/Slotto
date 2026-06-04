@@ -10,14 +10,19 @@
       it'll be easier to replace than just [ctrl] + [shift] + L.
 */
 
-char option1[] = "Bet";
-char option2[] = "Loan";
-char option3[] = "Deposit";
-char option4[] = "Withdrawl";
-char option5[] = "Exit";
+char option1[] = "bet";
+char option2[] = "loan";
+char option3[] = "deposit";
+char option4[] = "withdrawl";
+char option5[] = "exit";
 
-int bet(){
-  printf("BET\n");
+int bet(int bet_amount, int bet_times){
+
+  for (int i = 0; i < bet_times; i++){
+    printf("BET\n");
+  }
+  
+  return bet_amount;
 }
 
 void loan(){
@@ -52,33 +57,41 @@ int main(){
   printf("\t- %s\n", option3);
   printf("\t- %s\n", option4);
   printf("\t- %s\n", option5);
+  printf("User Balance : $%lld\n", user_balance);
 
   while(1){
 
     scanf("%s", &user_input);
     
-    if(strcmp(user_input, "bet") == 0){
-      bet();
+    if(strcmp(user_input, option1) == 0){
+
+      printf("How much would you like to bet? : ");
+      scanf("%d", &bet_amount);
+
+      printf("How many times would you like to bet? : ");
+      scanf("%d", &bet_times);
+
+      user_balance = bet(bet_amount, bet_times);
     }
     
-    else if(strcmp(user_input, "loan") == 0){
+    else if(strcmp(user_input, option2) == 0){
       loan();
     }
     
-    else if(strcmp(user_input, "deposit")== 0){
+    else if(strcmp(user_input, option3)== 0){
       deposit();
     }
     
-    else if(strcmp(user_input, "withdrawl") == 0){
+    else if(strcmp(user_input, option4) == 0){
       withdrawl();
     }
 
-    else if(strcmp(user_input, "exit") == 0){
+    else if(strcmp(user_input, option5) == 0){
       break;
     }
     
     else{
-      printf("%s was not valid, try again.", user_input);
+      printf("\"%s\" was not valid, please try again.\n", user_input);
     };
   }
 
