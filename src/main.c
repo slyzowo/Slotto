@@ -12,9 +12,29 @@
 
 char option1[] = "bet";
 char option2[] = "loan";
-char option3[] = "deposit";
-char option4[] = "withdrawl";
-char option5[] = "exit";
+char option3[] = "pay";
+char option4[] = "deposit";
+char option5[] = "withdrawl";
+char option6[] = "exit";
+
+enum Command{
+  BET,
+  LOAN,
+  PAY,
+  DEPOSIT,
+  WITHDRAWL,
+  EXIT,
+};
+
+enum Command command_parser(const char *user_input){
+  if (strcmp(user_input, "bet") == 0){ return BET; }
+  if (strcmp(user_input, "loan") == 0){ return LOAN; }
+  if (strcmp(user_input, "pay") == 0){ return PAY; }
+  if (strcmp(user_input, "withdrawl") == 0){ return WITHDRAWL; }
+  if (strcmp(user_input, "deposit") == 0){ return DEPOSIT; }
+  if (strcmp(user_input, "exit") == 0){ return EXIT; }
+  
+}
 
 int bet(int bet_amount, int bet_times){
 
@@ -58,45 +78,51 @@ int main(){
   printf("\t- %s\n", option3);
   printf("\t- %s\n", option4);
   printf("\t- %s\n", option5);
+  printf("\t- %s\n", option6);
   printf("User Balance : $%lld\n", user_balance);
   
   while(1){
     
     scanf("%s", &user_input);
-    
-    if(strcmp(user_input, option1) == 0){
-      printf("How much would you like to bet? : $");
-      scanf("%d", &bet_amount);
-      printf("How many times would you like to bet? : ");
-      scanf("%d", &bet_times);
-      bet_amount = bet(bet_amount, bet_times);
-      printf("User Balance : $%lld\n", user_balance);
-    }
-    
-    else if(strcmp(user_input, option2) == 0){      
-      printf("How much would you like to loan from the mafia? : $");
-      scanf("%d", &loan_amount);
-      loan_amount = loan(loan_amount);
-      user_balance += loan_amount;
-      printf("User Balance : $%lld\n", user_balance);
-    }
-    
-    else if(strcmp(user_input, option3)== 0){
-      deposit();
-    }
-    
-    else if(strcmp(user_input, option4) == 0){
-      withdrawl();
-    }
+    switch(command_parser(user_input)){
+      case BET:
+        printf("How much would you like to bet? : $");
+        scanf("%d", &bet_amount);
+        printf("How many times would you like to bet? : ");
+        scanf("%d", &bet_times);
+        bet_amount = bet(bet_amount, bet_times);
+        printf("User Balance : $%lld\n", user_balance);
+      break;
 
-    else if(strcmp(user_input, option5) == 0){
+      case LOAN: 
+        printf("How much would you like to loan from the mafia? : $");
+        scanf("%d", &loan_amount);
+        loan_amount = loan(loan_amount);
+        user_balance += loan_amount;
+        printf("User Balance : $%lld\n", user_balance);
+      break;
+
+      case PAY: 
+        // TODO: IMPLEMENT PAYING OFF THE MAFIA
+      break;
+
+      case DEPOSIT: 
+        deposit();
+      break;
+
+      case WITHDRAWL: 
+        withdrawl();
+      break;
+
+      case EXIT:
+        return EXIT_SUCCESS; 
+      break;
+    
+    default:
+      printf("\"%s\" was not valid, please try again.\n", user_input);
       break;
     }
-    
-    else{
-      printf("\"%s\" was not valid, please try again.\n", user_input);
-    };
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
