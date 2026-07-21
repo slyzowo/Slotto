@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 #include <time.h>
+#include <windows.h>
 
 /*
   Q : why are these variables?
@@ -24,39 +24,68 @@ enum Command{
   DEPOSIT,
   WITHDRAWL,
   EXIT,
+  INVALID,
 };
 
-enum Command command_parser(const char *user_input){
+enum Command CommandParser(const char *user_input){
   if (strcmp(user_input, "bet") == 0){ return BET; }
   if (strcmp(user_input, "loan") == 0){ return LOAN; }
   if (strcmp(user_input, "pay") == 0){ return PAY; }
   if (strcmp(user_input, "withdrawl") == 0){ return WITHDRAWL; }
   if (strcmp(user_input, "deposit") == 0){ return DEPOSIT; }
   if (strcmp(user_input, "exit") == 0){ return EXIT; }
-  
+  else{ return INVALID; }
 }
 
-int bet(int bet_amount, int bet_times){
-
-  for (int i = 0; i < bet_times; i++){
-    printf("BET\n");
-  }
-  
-  return bet_amount;
+int Bet(int amount, int times){
+  printf("BET\n");
 }
 
-int loan(int loan_amount){
-  printf("You\'ve now loaned from the mafia.\n");
-  printf("You now have to pay $%d back.\n", loan_amount + loan_amount);
-return loan_amount;
+void Loan(int amount){
+  printf("LOAN\n");
 }
 
-void deposit(){
+void Pay(int amount){
+  printf("PAY\n");
+}
+
+void Deposit(){
   printf("DEPOSIT\n");
 }
 
-void withdrawl(){
+void Withdrawl(){
   printf("WITHDRAWL\n");
+}
+
+void SaveGame(int user_balance, int loan_amount, short risk, bool death){
+  FILE *pFile = fopen("slotto_save.txt", "w");
+  fprintf(pFile, "%d\n", user_balance);
+  fprintf(pFile, "%d\n", loan_amount);
+  fprintf(pFile, "%d\n", risk);
+  fprintf(pFile, "%d\n", death);
+  fclose(pFile);
+}
+
+void ReadSaveFile(){
+  char buffer[255];
+
+  FILE *pF = fopen("slotto_save.txt", "r");
+
+  if(pF != NULL){
+    while (fgets(buffer, sizeof(buffer), pF)) {
+      // Print each buffer to the standard output.
+      printf("%s", buffer);
+    }
+  }
+  else{
+    printf("File Not Found!");
+  }
+  fclose(pF);
+}
+
+void GenerateSaveFile(){
+  FILE *pF = fopen("slotto_save.txt", "w");
+  fclose(pF);
 }
 
 int main(){
@@ -70,59 +99,9 @@ int main(){
   short int risk = 0;
   bool death = false;
   char user_input[] = "";
-  srand(time(NULL));
-  
-  printf("Commands :\n");
-  printf("\t- %s\n", option1);
-  printf("\t- %s\n", option2);
-  printf("\t- %s\n", option3);
-  printf("\t- %s\n", option4);
-  printf("\t- %s\n", option5);
-  printf("\t- %s\n", option6);
-  printf("User Balance : $%lld\n", user_balance);
-  
-  while(1){
-    
-    scanf("%s", &user_input);
-    switch(command_parser(user_input)){
-      case BET:
-        printf("How much would you like to bet? : $");
-        scanf("%d", &bet_amount);
-        printf("How many times would you like to bet? : ");
-        scanf("%d", &bet_times);
-        bet_amount = bet(bet_amount, bet_times);
-        printf("User Balance : $%lld\n", user_balance);
-      break;
 
-      case LOAN: 
-        printf("How much would you like to loan from the mafia? : $");
-        scanf("%d", &loan_amount);
-        loan_amount = loan(loan_amount);
-        user_balance += loan_amount;
-        printf("User Balance : $%lld\n", user_balance);
-      break;
-
-      case PAY: 
-        // TODO: IMPLEMENT PAYING OFF THE MAFIA
-      break;
-
-      case DEPOSIT: 
-        deposit();
-      break;
-
-      case WITHDRAWL: 
-        withdrawl();
-      break;
-
-      case EXIT:
-        return EXIT_SUCCESS; 
-      break;
-    
-    default:
-      printf("\"%s\" was not valid, please try again.\n", user_input);
-      break;
-    }
-  }
+  SaveGame(user_balance, loan_amount, risk, death);
+  ReadSaveFile();
 
   return EXIT_SUCCESS;
 }
