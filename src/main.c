@@ -41,7 +41,8 @@ enum Command CommandParser(const char *user_input){
 }
 
 int Bet(int amount, int times){
-  printf("BET\n");
+  printf("Bet Amount : %d\n", amount);
+  printf("Bet Times : %d\n", times);
 }
 
 void Loan(int amount){
@@ -62,13 +63,13 @@ void Withdrawl(){
 
 void ShowCommands(){
   printf("Commands :\n");
-  printf("\t%s\n", option1);
-  printf("\t%s\n", option2);
-  printf("\t%s\n", option3);
-  printf("\t%s\n", option4);
-  printf("\t%s\n", option5);
-  printf("\t%s\n", option6);
-  printf("\t%s\n\n", option7);
+  printf("\t- %s\n", option1);
+  printf("\t- %s\n", option2);
+  printf("\t- %s\n", option3);
+  printf("\t- %s\n", option4);
+  printf("\t- %s\n", option5);
+  printf("\t- %s\n", option6);
+  printf("\t- %s\n\n", option7);
 }
 
 void SaveGame(int user_balance, int loan_amount, short risk, bool death){
@@ -122,11 +123,15 @@ int main(){
     switch(CommandParser(user_input)){
 
     case INVALID:
-      printf("Invalid\n");
+      printf("Invalid command, please try again.\n");
     break;
 
     case BET:
-      printf("Bet\n");
+      printf("How much money would you like to bet?\n$");
+      scanf("%d", bet_amount);
+      printf("How many times would you like to bet?\n");
+      scanf("%d", bet_times);
+      Bet(bet_amount, bet_times);
     break;
 
     case LOAN:
