@@ -15,16 +15,18 @@ char option2[] = "loan";
 char option3[] = "pay";
 char option4[] = "deposit";
 char option5[] = "withdrawl";
-char option6[] = "exit";
+char option6[] = "help";
+char option7[] = "exit";
 
 enum Command{
+  INVALID,
   BET,
   LOAN,
   PAY,
   DEPOSIT,
   WITHDRAWL,
+  HELP,
   EXIT,
-  INVALID,
 };
 
 enum Command CommandParser(const char *user_input){
@@ -33,6 +35,7 @@ enum Command CommandParser(const char *user_input){
   if (strcmp(user_input, "pay") == 0){ return PAY; }
   if (strcmp(user_input, "withdrawl") == 0){ return WITHDRAWL; }
   if (strcmp(user_input, "deposit") == 0){ return DEPOSIT; }
+  if (strcmp(user_input, "help") == 0){ return HELP; }
   if (strcmp(user_input, "exit") == 0){ return EXIT; }
   else{ return INVALID; }
 }
@@ -55,6 +58,17 @@ void Deposit(){
 
 void Withdrawl(){
   printf("WITHDRAWL\n");
+}
+
+void ShowCommands(){
+  printf("Commands :\n");
+  printf("\t%s\n", option1);
+  printf("\t%s\n", option2);
+  printf("\t%s\n", option3);
+  printf("\t%s\n", option4);
+  printf("\t%s\n", option5);
+  printf("\t%s\n", option6);
+  printf("\t%s\n\n", option7);
 }
 
 void SaveGame(int user_balance, int loan_amount, short risk, bool death){
@@ -90,8 +104,8 @@ void GenerateSaveFile(){
 
 int main(){
 
-  long long int user_balance = 100;
-  long long int bet_amount = 0;
+  int user_balance = 100;
+  int bet_amount = 0;
   int loan_amount = 0;
   int bet_times = 0;
   int rand_num = 0;
@@ -100,8 +114,49 @@ int main(){
   bool death = false;
   char user_input[] = "";
 
-  SaveGame(user_balance, loan_amount, risk, death);
-  ReadSaveFile();
+  ShowCommands();
+
+  while(1){
+    scanf("%s", user_input);
+
+    switch(CommandParser(user_input)){
+
+    case INVALID:
+      printf("Invalid\n");
+    break;
+
+    case BET:
+      printf("Bet\n");
+    break;
+
+    case LOAN:
+    printf("Loan\n");
+    break;
+    
+    case PAY:
+    printf("Pay\n");
+    break;
+    
+    case WITHDRAWL:
+    printf("Withdrawl\n");
+    break;
+    
+    case DEPOSIT:
+    printf("Deposit\n");
+    break;
+    
+    case HELP:
+    printf("Help\n");
+    break;
+    
+    case EXIT:
+    return EXIT_SUCCESS;
+
+    default:
+    break;
+    }
+  }
+  
 
   return EXIT_SUCCESS;
 }
