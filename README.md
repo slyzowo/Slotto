@@ -9,6 +9,20 @@ TUI psuedo-gambling app
 ![Windows 11](https://img.shields.io/badge/Windows%2011-%230079d5.svg?style=for-the-badge&logo=Windows%2011&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
+### Table of Contents
+- [Installation](#installation)
+- [Languages Supported](#languages-supported)
+- [How Do I Play?](#how-do-i-play)
+   - [Bet](#bet)
+   - [Loan](#loan)
+   - [Deposit](#deposit)
+   - [Withdrawl](#withdrawl)
+   - [Death](#death)
+- [TODO List](#todo)
+- [License](#license)
+- [Authors](#authors)
+
+
 # Installation
 
 download from [link] and run the `.exe`
@@ -90,3 +104,9 @@ In the case that you die from the Mafia, or that you run to or below zero dollar
 4. make a GUI
    - [ ] controller support
    - [ ] mouse interactivity
+  
+# License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+# Authors
+slyzowo
